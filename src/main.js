@@ -1,13 +1,16 @@
-function changeRandomColor() {
-  const sections = document.querySelectorAll('section');
+const themeToggle = document.getElementById('theme-toggle');
 
-  const r = Math.floor(Math.random() * 56) + 200;
-  const g = Math.floor(Math.random() * 56) + 200;
-  const b = Math.floor(Math.random() * 56) + 200;
-  const randomColor = `rgb(${r}, ${g}, ${b})`;
-
-  sections.forEach(section => {
-    section.style.backgroundColor = randomColor;
-    section.style.transition = 'background-color 0.5s ease';
-  });
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark-mode');
+  themeToggle.checked = true;
 }
+
+themeToggle.addEventListener('change', () => {
+  if (themeToggle.checked) {
+    document.body.classList.add('dark-mode');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.body.classList.remove('dark-mode');
+    localStorage.setItem('theme', 'light');
+  }
+});
